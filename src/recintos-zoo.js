@@ -1,6 +1,7 @@
 class RecintosZoo {
 
     constructor() {
+        // Cria um array de objetos que representam os recintos do coológico.
         this.recintos = [
             { numero: 1, bioma: "savana", tamanhoTotal: 10, animais: [{ especie: "MACACO", quantidade: 3, espaco: 1 }] },
             { numero: 2, bioma: "floresta", tamanhoTotal: 5, animais: [] },
@@ -9,6 +10,7 @@ class RecintosZoo {
             { numero: 5, bioma: "savana", tamanhoTotal: 9, animais: [{ especie: "LEAO", quantidade: 1, espaco: 3 }] }
         ];
         
+        // Cria um objeto para definir as carascteristicas de cada aimal permitido.
         this.animaisPermitidos = {
             "LEAO": { espaco: 3, bioma: ["savana"], carnivoro: true },
             "LEOPARDO": { espaco: 2, bioma: ["savana"], carnivoro: true },
@@ -20,10 +22,12 @@ class RecintosZoo {
     }
 
     analisaRecintos(animal, quantidade) {
+        // Verifica se o nome do animal passado está presenten em "animaisPermitidos"
         if (!this.animaisPermitidos[animal]) {
             return { erro: "Animal inválido" };
         }
     
+        // Verifica se a quantidade é um numero inteiro ou maor que 0
         if (!Number.isInteger(quantidade) || quantidade <= 0) {
             return { erro: "Quantidade inválida" };
         }
@@ -56,10 +60,12 @@ class RecintosZoo {
     
             // Se houver mais de uma espécie no recinto, adiciona 1 de espaço extra
             const maisDeUmaEspecie = recinto.animais.length > 0 && recinto.animais[0].especie !== animal;
-            const espacoNecessarioTotal = espacoNecessario + (maisDeUmaEspecie ? 1 : 0); // Aqui o ajuste da espécie extra
+            const espacoNecessarioTotal = espacoNecessario + (maisDeUmaEspecie ? 1 : 0)
     
             // Verifica se há espaço suficiente após o cálculo do espaço adicional
             return espacoLivre >= espacoNecessarioTotal;
+
+        // Faz o mapeamento dos recintos viáveis para exibição
         }).map(recinto => {
             const espacoOcupado = calcularEspacoOcupado(recinto);
             const maisDeUmaEspecie = recinto.animais.length > 0 && recinto.animais[0].especie !== animal;
@@ -68,6 +74,7 @@ class RecintosZoo {
             return `Recinto ${recinto.numero} (espaço livre: ${espacoLivreAposInclusao} total: ${recinto.tamanhoTotal})`;
         });
     
+        // Retorna mensagem de que não há receintos viaveis caso os resintos viaveis sejam igual a 0
         if (recintosViaveis.length === 0) {
             return { erro: "Não há recinto viável" };
         }
