@@ -69,7 +69,7 @@ class RecintosZoo {
         }).map(recinto => {
             const espacoOcupado = calcularEspacoOcupado(recinto);
             const maisDeUmaEspecie = recinto.animais.length > 0 && recinto.animais[0].especie !== animal;
-            const espacoNecessarioTotal = espacoNecessario + (maisDeUmaEspecie ? 1 : 0); // Aqui o ajuste da espécie extra
+            const espacoNecessarioTotal = espacoNecessario + (maisDeUmaEspecie ? 1 : 0);
             const espacoLivreAposInclusao = recinto.tamanhoTotal - espacoOcupado - espacoNecessarioTotal;
             return `Recinto ${recinto.numero} (espaço livre: ${espacoLivreAposInclusao} total: ${recinto.tamanhoTotal})`;
         });
